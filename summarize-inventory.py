@@ -55,30 +55,30 @@
 # Remember: do not use dictionaries or sets – just lists and loops.
 
 # My Solution
-# def summarize_inventory(items):
-#     summary = []
-#     seen = []
-
-#     for item in items:
-#         if item not in seen:
-#             count = items.count(item)
-#             summary.append([item, count])
-#             seen.append(item)
-#     return summary
-
 def summarize_inventory(items):
     summary = []
+    seen = []
 
-    for name in items:
-        found = False
-
-        for pair in summary:
-            if pair[0] == name:
-                pair[1] = pair[1] + 1
-                found = True
-                break
-
-        if not found:
-            summary.append([name, 1])
-
+    for item in items:
+        if item not in seen:
+            count = items.count(item)
+            summary.append([item, count])
+            seen.append(item)
     return summary
+
+# def summarize_inventory(items):
+#     summary = []
+
+#     for name in items:
+#         found = False
+
+#         for pair in summary:
+#             if pair[0] == name:
+#                 pair[1] = pair[1] + 1
+#                 found = True
+#                 break
+
+#         if not found:
+#             summary.append([name, 1])
+
+#     return summary
