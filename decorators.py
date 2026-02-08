@@ -50,3 +50,14 @@ def markdown_to_text_decorator(func):
         return func(*new_args, **new_kwargs)
         
     return wrapper
+
+# using dict comprehension instead of a helper function
+
+def markdown_to_text_decorator(func):
+    def wrapper(*args, **kwargs):
+        new_args = list(map(convert_md_to_txt, args))
+
+        new_kwargs = {key: convert_md_to_txt(value) for key, value in kwargs.items()}
+
+        return func(*new_args, **new_kwargs)
+    return wrapper
