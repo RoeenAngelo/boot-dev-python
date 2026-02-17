@@ -52,11 +52,11 @@ class BSTNode:
         # we do this to follow the binary tree rule where left < root < right.
         # we can also choose left, but make sure to go right after.
         
-            curr = self.right
-            while curr.left:
-                curr = curr.left
-            self.val = curr.val
-            self.right = self.right.delete(curr.val) #clean-up
+            successor = self.right
+            while successor.left:
+                successor = successor.left
+            self.val = successor.val
+            self.right = self.right.delete(successor.val) #clean-up
             return self
             
     # don't touch below this line
