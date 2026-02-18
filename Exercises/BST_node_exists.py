@@ -1,0 +1,22 @@
+# Node Exists
+# On LockedIn, it's common for one user to navigate directly to another user's profile. We even creepily give the stalked user a notification that someone is looking at their profile.
+
+# To make this feature work, we need to be able to quickly check if a user exists in our tree.
+
+# Assignment
+# Complete the exists method.
+
+# It should take a value as input and return True if the value exists in the tree, and False if it doesn't. It's a recursive method, as you probably guessed.
+
+class BSTNode:
+    def exists(self, val):
+        if val == self.val:
+            return True
+        if val < self.val:
+            return self.left.exists(val) if self.left else False
+        # val > self.val
+        return self.right.exists(val) if self.right else False
+
+
+
+
