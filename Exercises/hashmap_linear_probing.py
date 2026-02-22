@@ -1,0 +1,54 @@
+# Linear Probing
+# In the previous lessons, we've built a basic hash map that can add and retrieve key-value pairs. However, our current implementation does not handle collisions well. In the context of LockedIn, we want to make sure that user information can never be lost or overwritten.
+
+# Collisions happen when two different keys have the same index after applying the key_to_index function. To handle collisions, we can use a technique called linear probing.
+
+# Linear probing works by finding the next available slot after the collision index and placing the new key*value pair there.
+
+# Assignment
+# Complete the insert and get methods.
+
+# Insert
+# Compute the index for the key in the hashmap with self.key_to_index(key). Create an original_index variable and assign index to it.
+# Initialize a boolean variable first_iteration to True.
+# Begin a while loop that continues as long as the hashmap's slot at index is occupied (not None) and its key doesn't match the key being inserted.
+# If this is not the first iteration and the current index equals original_index, raise an exception "hashmap is full". This means we've traversed the entire hashmap without finding an empty slot.
+# Increment index by 1 and wrap it around to the start of the hashmap if necessary (using modulo operation with hashmap's length).
+# Set first_iteration to False after the first iteration.
+# Insert the key-value pair at the found index: self.hashmap[index] = (key, value).
+# Get
+# Compute the index for the key in the hashmap with self.key_to_index(key). Create an original_index variable and assign index to it.
+# Initialize a boolean variable first_iteration to True.
+# Begin a while loop that continues as long as the hashmap's slot at index is occupied (not None).
+# If the key at the current index matches the key being searched, return the value from the key-value pair in the hashmap at the current index.
+# If this is not the first iteration and the current index equals original_index, raise an exception "sorry, key not found". This means we've traversed the entire hashmap without finding the key.
+# If the key does not match, increment index by 1 and wrap it around to the start of the hashmap if necessary (using modulo operation with hashmap's length).
+# Set first_iteration to False after the first iteration.
+# If the while loop completes without finding a match, raise an exception "sorry, key not found".
+
+def insert(self, key, value):
+        index = self.key_to_index(key)
+        original_index = index
+        first_iteration = True
+        
+        while self.hashmap[index] is not None and self.hashmap[index][0] != key:
+            if not first_iteration and index == original_index:
+                raise Exception("hashmap is full")
+            index = (index + 1) % len(self.hashmap)
+            first_iteration = False
+        self.hashmap[index] = (key, value)
+    
+    def get(self, key):
+        index = self.key_to_index(key)
+        original_index = index
+        first_iteration = True
+        
+        while self.hashmap[index] is not None:
+            k, v = self.hashmap[index]
+            if k == key:
+                return v
+            if not first_iteration and index == original_index:
+                raise Exception("sorry, key not found")
+            index = (index + 1) % len(self.hashmap)
+            first_iteration = False
+        raise Exception("sorry, key not found")
